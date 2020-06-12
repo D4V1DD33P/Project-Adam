@@ -19,12 +19,12 @@ namespace DatingApp.API.Data
 
             if(user == null) {return null;} 
 
-            if(!VeryPasswordHash(password, user.PasswordHash, user.PasswordSalt)) {return null;}
+            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) {return null;}
 
             return user;
         }
 
-        private bool VeryPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) 
             {
@@ -34,7 +34,6 @@ namespace DatingApp.API.Data
                 }
             }
             return true; 
-
         }
 
         public async Task<User> Register(User user, string password)
@@ -51,7 +50,8 @@ namespace DatingApp.API.Data
             return user;
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void 
+        CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512()) 
             {

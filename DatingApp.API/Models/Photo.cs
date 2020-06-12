@@ -1,4 +1,5 @@
 using System;
+using DatingApp.API.Dtos;
 
 namespace DatingApp.API.Models
 {
@@ -15,5 +16,10 @@ namespace DatingApp.API.Models
         public string PublicId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+
+        internal object Select(Func<object, PhotoForReturnDto> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
